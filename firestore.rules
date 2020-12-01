@@ -16,6 +16,9 @@ service cloud.firestore {
       request.resource.data.pushTokenWeb is string
       && request.auth.uid == uid;
       allow read: if request.auth.uid == uid;
+auth.uid == uid;
+auth.uid == uid;
+auth.uid == uid;
     }
   }
 }
