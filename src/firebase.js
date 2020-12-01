@@ -1,12 +1,14 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/messaging";
 import "firebase/auth";
 import "firebase/functions";
+
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_ID
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 firebase.initializeApp(config);
 
@@ -21,11 +23,12 @@ if ("Notification" in window) {
 
   messaging.onTokenRefresh(() => {
     const db = firebase.firestore();
+    const auth = firebase.auth();
     messaging
       .getToken()
       .then(refreshedToken => {
         db.collection("users")
-          .doc(firebase.auth().currentUser.uid)
+          .doc(auth.currentUser.uid)
           .update({ pushTokenWeb: refreshedToken })
           .then(() => {
             console.log("Token updated.");

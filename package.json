@@ -18,9 +18,6 @@
     "eject": "react-scripts eject",
     "setup": "npm i && cd functions && npm i && cd .. && cp env_template.txt .env.production.local && cp env_template.txt .env.development.local"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
