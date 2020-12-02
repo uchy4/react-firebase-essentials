@@ -53,6 +53,7 @@ const MainRouter = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (!!user) {
         const uid = firebase.auth().currentUser.uid;
+        console.log("user:", firebase.auth().currentUser);
         db.collection("users")
           .doc(uid)
           .get()
